@@ -2,24 +2,25 @@
 
 
 {% block content %}
-    <div>
+    <div class="card d-flex flex-row">
+        <img class="mr-3 circle-img" src="{{ announcement.image.url }}" alt="user_avatar"
+             width="400"
+             height="500">
         <div>
-            <div>
-                <img class="mr-3 circle-img" src="{{ announcement.image.url }}" alt="user_avatar"
-                     width="80"
-                     height="80">
-
+            <div class="card-body">
+                <h5 class="card-title">{{ announcement.title }}</h5>
+                <p class="card-text">{{ announcement.description }}</p>
             </div>
-            <h3>{{ announcement.title }}</h3>
-            <p><span>Описание:</span> {{ announcement.description }}</p>
-            {% if announcement.price != 0 %}
-                <p><span>Цена:</span> {{ announcement.price }}</p>
-            {% endif %}
-            <p><span>Категория:</span> {{ announcement.category.name }}</p>
-            <p><span>Дата публикации:</span> {{ announcement.publicated_at }}</p>
-            <a style="text-decoration: none; color: black" href="{% url "accounts:profile" announcement.author.pk %}">Автор:<b> {{ announcement.author.first_name }} {{ announcement.author.last_name }}</b></a>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><a style="text-decoration: none; color: black"
+                                               href="{% url "accounts:profile" announcement.author.pk %}">Автор:<b> {{ announcement.author.first_name }} {{ announcement.author.last_name }}</b></a>
+                </li>
+                <li class="list-group-item"><span>Цена: </span>{{ announcement.price }}</li>
+                <li class="list-group-item"><span>Категория:</span> {{ announcement.category.name }}</li>
+                <li class="list-group-item"><span>Дата публикации:</span> {{ announcement.publicated_at }}</li>
+            </ul>
             {% if request.user == announcement.author %}
-                <div style="display: flex; flex-direction: row">
+                <div class="card-body">
                     <form action="{% url "webapp:announcemen_update" announcement.pk %}" method="get">
                         <button style="margin: 5px" class="btn btn-success">Редактировать</button>
                     </form>
