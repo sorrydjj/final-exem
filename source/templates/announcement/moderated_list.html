@@ -2,11 +2,13 @@
 
 {% block content %}
     <h1>Объявление на проверку</h1>
+    <div id="status_info">
+
+    </div>
     <div class="d-flex">
         <div class="row">
             {% for announcement in announcements %}
-
-                <div class="col-xs-4" style="width: auto">
+                <div id="block_moderated_{{ announcement.pk }}" class="col-xs-4" style="width: auto">
                     <div class="card col" style="width: 18rem;">
                         <img src="{{ announcement.image.url }}" class="card-img-top" alt="...">
                         <div class="card-body">
@@ -19,11 +21,14 @@
                                 <p><span>Цена:</span> {{ announcement.price }}</p>
                             {% endif %}
                             <p><span>Категория:</span> {{ announcement.category.name }}</p>
-                            <a style="text-decoration: none; color: black" href="{% url "accounts:profile" announcement.author.pk %}">
+                            <a style="text-decoration: none; color: black"
+                               href="{% url "accounts:profile" announcement.author.pk %}">
                                 Автор:<b> {{ announcement.author.first_name }} {{ announcement.author.last_name }}</b>
                             </a>
-
-
+                            <div style="display: flex; flex-direction: row">
+                                <button data-pk="{{ announcement.pk }}" onclick="acceptStatus(event)" style="margin: 5px" class="btn btn-success">Принять</button>
+                                <button data-pk="{{ announcement.pk }}" onclick="rejectStatus(event)" style="margin: 5px" class="btn btn-danger">Отклонить</button>
+                            </div>
                         </div>
                     </div>
 

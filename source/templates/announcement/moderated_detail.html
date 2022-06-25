@@ -17,14 +17,14 @@
             {% endif %}
             <p><span>Категория:</span> {{ announcement.category.name }}</p>
             <a style="text-decoration: none; color: black" href="{% url "accounts:profile" announcement.author.pk %}">Автор:<b> {{ announcement.author.first_name }} {{ announcement.author.last_name }}</b></a>
-            {% if request.user == announcement.author %}
-                <div style="display: flex; flex-direction: row">
-                    <form action="{% url "webapp:announcemen_update" announcement.pk %}" method="get">
-                        <button style="margin: 5px" class="btn btn-success">Редактировать</button>
-                    </form>
-                    <form action="{% url "webapp:announcemen_delete" announcement.pk %}" method="get">
-                        <button style="margin: 5px" class="btn btn-success">Удалить</button>
-                    </form>
+            {% if announcement.status == "moderated" %}
+                <div id="block_moderated_{{ announcement.pk }}" style="display: flex; flex-direction: row">
+                    <button data-pk="{{ announcement.pk }}" onclick="acceptStatus(event)" style="margin: 5px"
+                            class="btn btn-success">Принять
+                    </button>
+                    <button data-pk="{{ announcement.pk }}" onclick="rejectStatus(event)" style="margin: 5px"
+                            class="btn btn-danger">Отклонить
+                    </button>
                 </div>
             {% endif %}
 
