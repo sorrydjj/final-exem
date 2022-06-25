@@ -18,3 +18,13 @@ class AuthorRegistrationForm(UserCreationForm):
             if commit:
                 user.save()
             return user
+
+
+class AuthorUpdateForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ("first_name", "last_name", "username", "phone",)
+        widgets = {}
+        labels = {"first_name": "Имя", "last_name": "Фамилия", "username": "Никнейм", "phone": "Номер телефона", }
+
+

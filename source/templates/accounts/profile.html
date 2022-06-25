@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-profile">
+            <h2 style="margin: 20px">{{ author.first_name }} {{ author.last_name }}</h2>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ author.username }}</h5>
+            <p class="card-text">Номер телефона: <span>{{ author.phone }}</span></p>
+            <form action="{% url "accounts:profile_update" author.pk %}">
+                <button class="btn btn-success">Редактировать Профиль</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

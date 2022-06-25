@@ -40,7 +40,11 @@
                             <a class="nav-link" href="{% url 'webapp:announcemen_create' %}">Создать Объявление</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'webapp:announcemen_moder_list' %}">Объявление Для Модерации</a>
+                            <a class="nav-link" href="{% url 'webapp:announcemen_moder_list' %}">Объявление Для
+                                Модерации</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'accounts:profile' request.user.pk %}">Привер, <b>{{ request.user.username }}</b></a>
                         </li>
                     {% endif %}
                 {% endblock %}

@@ -2,8 +2,9 @@
 
 {% block content %}
     {% for announcement in announcements %}
-        <div class="block-ann">
-            <div>
+        <div class="card" style="width: 18rem;">
+            <img src="{{ announcement.image.url }}" class="card-img-top" alt="...">
+            <div class="card-body">
                 <a href="{% url "webapp:announcemen_detail" announcement.pk %}"><span>{{ announcement.title }}</span></a>
                 <p><span>Описание:</span> {{ announcement.title }}</p>
                 {% if announcement.price != 0 %}
@@ -12,8 +13,10 @@
                 <p><span>Категория:</span> {{ announcement.category.name }}</p>
                 <p><span>Автор:</span> {{ announcement.author.first_name }} {{ announcement.author.last_name }}</p>
 
+
             </div>
         </div>
+
     {% endfor %}
 
 {% endblock %}
