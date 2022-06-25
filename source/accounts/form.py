@@ -23,8 +23,8 @@ class AuthorRegistrationForm(UserCreationForm):
 class AuthorUpdateForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ("first_name", "last_name", "username", "phone",)
+        fields = ("first_name", "last_name", "phone",)
         widgets = {}
-        labels = {"first_name": "Имя", "last_name": "Фамилия", "username": "Никнейм", "phone": "Номер телефона", }
+        labels = {"first_name": "Имя", "last_name": "Фамилия", "phone": "Номер телефона", }
 
 

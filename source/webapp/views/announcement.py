@@ -68,3 +68,9 @@ class AnnouncementModeratedListView(ListView):
 
     def get_queryset(self):
         return super().get_queryset().filter(status="moderated").exclude(is_delete=True).order_by("created_at")
+
+
+class AnnouncementModeratedDetailView(DetailView):
+    model = Announcement
+    template_name = "../templates/announcement/moderated_detail.html"
+    context_object_name = "announcement"
