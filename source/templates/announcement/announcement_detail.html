@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+
+{% block content %}
+    <div>
+        <div>
+            <div>
+                <img class="mr-3 circle-img" src="{{ announcement.image.url }}" alt="user_avatar"
+                     width="80"
+                     height="80">
+
+            </div>
+            <a href="{% url "webapp:announcemen_detail" announcement.pk %}"><span>{{ announcement.title }}</span></a>
+            <p><span>Описание:</span> {{ announcement.title }}</p>
+            {% if announcement.price != 0 %}
+                <p><span>Цена:</span> {{ announcement.price }}</p>
+            {% endif %}
+            <p><span>Категория:</span> {{ announcement.category.name }}</p>
+            <p><span>Автор:</span> {{ announcement.author.first_name }} {{ announcement.author.last_name }}</p>
+            <a href="{% url "webapp:announcemen_update" announcement.pk %}"><span>Редактировать</span></a>
+            <a href="{% url "webapp:announcemen_delete" announcement.pk %}"><span>Удалить</span></a>
+
+        </div>
+    </div>
+
+{% endblock %}
