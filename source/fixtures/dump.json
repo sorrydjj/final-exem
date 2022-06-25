@@ -1,0 +1,256 @@
+[
+  {
+    "model": "webapp.category",
+    "pk": 1,
+    "fields": {
+      "name": "Оборудование"
+    }
+  },
+  {
+    "model": "webapp.category",
+    "pk": 2,
+    "fields": {
+      "name": "Мемы"
+    }
+  },
+  {
+    "model": "webapp.category",
+    "pk": 3,
+    "fields": {
+      "name": "Код"
+    }
+  },
+  {
+    "model": "webapp.category",
+    "pk": 4,
+    "fields": {
+      "name": "Ошибки"
+    }
+  },
+  {
+    "model": "webapp.announcement",
+    "pk": 1,
+    "fields": {
+      "title": "Смешно",
+      "description": "СмешноСмешноСмешноСмешно",
+      "category": 1,
+      "image": "uploads/photo_2022-05-25_15-27-29_iBfd9FP.jpg",
+      "price": 200,
+      "created_at": "2022-06-25T10:44:34.852Z",
+      "update_at": null,
+      "publicated_at": "2022-06-25T16:47:05.172Z",
+      "status": "accepted",
+      "is_delete": false,
+      "author": 1
+    }
+  },
+  {
+    "model": "webapp.announcement",
+    "pk": 2,
+    "fields": {
+      "title": "Всемирно известный мем",
+      "description": "меммемеемемемеммемеемемемеммемеемемемеммемеемемемеммемеемеме",
+      "category": 2,
+      "image": "uploads/Clip2Net_DropZone_210906180235.png",
+      "price": 200,
+      "created_at": "2022-06-25T11:01:30.374Z",
+      "update_at": null,
+      "publicated_at": null,
+      "status": "moderated",
+      "is_delete": false,
+      "author": 1
+    }
+  },
+  {
+    "model": "webapp.announcement",
+    "pk": 3,
+    "fields": {
+      "title": "Меморийес",
+      "description": "тестовое описание",
+      "category": 2,
+      "image": "uploads/Clip2Net_DropZone_210906181216.png",
+      "price": 1000,
+      "created_at": "2022-06-25T11:04:48.095Z",
+      "update_at": null,
+      "publicated_at": null,
+      "status": "moderated",
+      "is_delete": false,
+      "author": 5
+    }
+  },
+  {
+    "model": "webapp.announcement",
+    "pk": 4,
+    "fields": {
+      "title": "Мемасики",
+      "description": "тестовое описание",
+      "category": 2,
+      "image": "uploads/instagram_user_picture.png",
+      "price": 100,
+      "created_at": "2022-06-25T11:05:22.824Z",
+      "update_at": null,
+      "publicated_at": "2022-06-25T17:10:25.514Z",
+      "status": "accepted",
+      "is_delete": false,
+      "author": 4
+    }
+  },
+  {
+    "model": "webapp.announcement",
+    "pk": 5,
+    "fields": {
+      "title": "НЕЧистый код",
+      "description": "тестовое описание",
+      "category": 3,
+      "image": "uploads/_220409211016.png",
+      "price": 1500,
+      "created_at": "2022-06-25T11:07:05.972Z",
+      "update_at": null,
+      "publicated_at": "2022-06-25T17:10:27.168Z",
+      "status": "accepted",
+      "is_delete": false,
+      "author": 5
+    }
+  },
+  {
+    "model": "webapp.announcement",
+    "pk": 6,
+    "fields": {
+      "title": "Ошибки",
+      "description": "тестовое описание",
+      "category": 4,
+      "image": "uploads/photo_2022-06-25_17-07-57.jpg",
+      "price": 0,
+      "created_at": "2022-06-25T11:08:13.102Z",
+      "update_at": null,
+      "publicated_at": "2022-06-25T17:10:29.245Z",
+      "status": "accepted",
+      "is_delete": false,
+      "author": 4
+    }
+  },
+  {
+    "model": "webapp.announcement",
+    "pk": 7,
+    "fields": {
+      "title": "Ошибочки",
+      "description": "тестовое описание",
+      "category": 4,
+      "image": "uploads/IMG.jpg",
+      "price": 400,
+      "created_at": "2022-06-25T11:09:05.445Z",
+      "update_at": null,
+      "publicated_at": "2022-06-25T17:10:31.590Z",
+      "status": "accepted",
+      "is_delete": false,
+      "author": 1
+    }
+  },
+  {
+    "model": "webapp.announcement",
+    "pk": 8,
+    "fields": {
+      "title": "Чистый код",
+      "description": "История чистого кода",
+      "category": 3,
+      "image": "uploads/Clip2Net_DropZone_210906180203.png",
+      "price": 2000,
+      "created_at": "2022-06-25T11:09:59.062Z",
+      "update_at": null,
+      "publicated_at": null,
+      "status": "rejected",
+      "is_delete": false,
+      "author": 5
+    }
+  },
+  {
+    "model": "webapp.comment",
+    "pk": 1,
+    "fields": {
+      "comment": "\nЯ свободен\n",
+      "announcement": 1,
+      "created_at": "2022-06-25T10:52:47.364Z",
+      "author": 1
+    }
+  },
+  {
+    "model": "webapp.comment",
+    "pk": 2,
+    "fields": {
+      "comment": "Я Мира сего",
+      "announcement": 1,
+      "created_at": "2022-06-25T10:59:19.910Z",
+      "author": 1
+    }
+  },
+  {
+    "model": "webapp.comment",
+    "pk": 3,
+    "fields": {
+      "comment": "Првииет Красавчик",
+      "announcement": 7,
+      "created_at": "2022-06-25T11:11:26.836Z",
+      "author": 1
+    }
+  },
+  {
+    "model": "webapp.comment",
+    "pk": 4,
+    "fields": {
+      "comment": "Ваще, ужасный код",
+      "announcement": 6,
+      "created_at": "2022-06-25T11:15:02.015Z",
+      "author": 4
+    }
+  },
+  {
+    "model": "webapp.comment",
+    "pk": 5,
+    "fields": {
+      "comment": "Чистый код )",
+      "announcement": 5,
+      "created_at": "2022-06-25T11:15:14.191Z",
+      "author": 4
+    }
+  },
+  {
+    "model": "webapp.comment",
+    "pk": 6,
+    "fields": {
+      "comment": "А хотя нет",
+      "announcement": 5,
+      "created_at": "2022-06-25T11:15:21.035Z",
+      "author": 4
+    }
+  },
+  {
+    "model": "webapp.comment",
+    "pk": 7,
+    "fields": {
+      "comment": "МЕМе",
+      "announcement": 4,
+      "created_at": "2022-06-25T11:15:35.196Z",
+      "author": 4
+    }
+  },
+  {
+    "model": "webapp.comment",
+    "pk": 8,
+    "fields": {
+      "comment": "смешна",
+      "announcement": 1,
+      "created_at": "2022-06-25T11:16:43.832Z",
+      "author": 5
+    }
+  },
+  {
+    "model": "webapp.comment",
+    "pk": 9,
+    "fields": {
+      "comment": "Ой, привет",
+      "announcement": 7,
+      "created_at": "2022-06-25T11:16:58.879Z",
+      "author": 5
+    }
+  }
+]

@@ -109,7 +109,6 @@ class AnnouncementModeratedListView(PermissionRequiredMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset().filter(status="moderated").exclude(is_delete=True).order_by("created_at")
         if self.search_value:
-            print(self.search_value)
             query = Q(title__icontains=self.search_value) | Q(description__icontains=self.search_value)
             queryset = queryset.filter(query)
         return queryset
