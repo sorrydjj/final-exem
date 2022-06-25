@@ -11,7 +11,7 @@
 
             </div>
             <a href="{% url "webapp:announcemen_detail" announcement.pk %}"><span>{{ announcement.title }}</span></a>
-            <p><span>Описание:</span> {{ announcement.title }}</p>
+            <p><span>Описание:</span> {{ announcement.description }}</p>
             {% if announcement.price != 0 %}
                 <p><span>Цена:</span> {{ announcement.price }}</p>
             {% endif %}
