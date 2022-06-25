@@ -19,17 +19,61 @@
                 <li class="list-group-item"><span>Категория:</span> {{ announcement.category.name }}</li>
                 <li class="list-group-item"><span>Дата публикации:</span> {{ announcement.publicated_at }}</li>
             </ul>
-            {% if request.user == announcement.author %}
-                <div class="card-body">
+            <div class="card-body">
+                {% if request.user == announcement.author %}
                     <form action="{% url "webapp:announcemen_update" announcement.pk %}" method="get">
                         <button style="margin: 5px" class="btn btn-success">Редактировать</button>
                     </form>
                     <form action="{% url "webapp:announcemen_delete" announcement.pk %}" method="get">
                         <button style="margin: 5px" class="btn btn-danger">Удалить</button>
                     </form>
-                </div>
+                {% endif %}
+            {% if request.user.is_authenticated %}
+                <button class="btn btn-warning" onclick="commentModalOpen()">Добавить комментарий</button>
             {% endif %}
+
+            </div>
+
         </div>
     </div>
+    <div>
+        <div>
+            {% for comment in announcement.comments.all %}
+                <ul class="list-group list-group-flush">
+                    <li style="border: none" class="list-group-item"><span></span>{{ comment.created_at }}</li>
+                    <li style="border: none" class="list-group-item"><span>Автор:</span> {{ comment.author }}</li>
+                    <li class="list-group-item"><span>Комментарий:</span> {{ comment.comment }}</li>
+                </ul>
+                <hr>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="CommentModalOpen" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Добавить комментарий</h2>
+                    <button onclick="modalCommentClose()" class="btn btn-close" data-bs-dismiss="modal"
+                            aria-label="Close">x
+                    </button>
+                </div>
+                <form action="{% url "webapp:add_comment" announcement.pk %}" method="post">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            {{ comment_form }}
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-success w-100" type="submit"
+                                    id="create-button">Сохранить
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
 {% endblock %}

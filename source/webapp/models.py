@@ -48,3 +48,15 @@ class Announcement(models.Model):
     def set_reject_status(self):
         self.status = "rejected"
         self.save()
+
+
+class Comment(models.Model):
+    comment = models.CharField(max_length=248, null=False, blank=False)
+    announcement = models.ForeignKey("webapp.Announcement", on_delete=models.CASCADE, related_name="comments")
+    created_at = models.DateTimeField(auto_now=True)
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="user_comments")
+
+    class Meta:
+        db_table = 'comment'
+        verbose_name = _('Коментарий')
+        verbose_name_plural = _('Коментарии')

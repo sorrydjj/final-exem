@@ -3,7 +3,7 @@ from django.db.models import Q
 from django.shortcuts import redirect
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 
-from webapp.forms import AnnouncementCreateForm, SearchForm
+from webapp.forms import AnnouncementCreateForm, SearchForm, CommentForm
 from webapp.models import Announcement
 
 
@@ -24,7 +24,6 @@ class AnnouncementListView(ListView):
         if self.search_value:
             query = Q(title__icontains=self.search_value) | Q(description__icontains=self.search_value)
             queryset = queryset.filter(query)
-        print(queryset)
         return queryset
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -73,6 +72,11 @@ class AnnouncementDetailView(DetailView):
     model = Announcement
     template_name = "../templates/announcement/announcement_detail.html"
     context_object_name = "announcement"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["comment_form"] = CommentForm
+        return context
 
 
 class AnnouncementDeleteView(PermissionRequiredMixin, DeleteView):
@@ -124,7 +128,6 @@ class AnnouncementModeratedListView(PermissionRequiredMixin, ListView):
     def get_search_value(self):
         if self.form.is_valid():
             return self.form.cleaned_data.get("search")
-
 
 
 class AnnouncementModeratedDetailView(PermissionRequiredMixin, DetailView):

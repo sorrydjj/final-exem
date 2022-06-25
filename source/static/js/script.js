@@ -55,3 +55,15 @@ async function rejectStatus(event) {
         alert("Операция не удалась")
     }
 }
+
+
+async function commentModalOpen() {
+    let element = document.getElementById("CommentModalOpen")
+    element.style.display = "block"
+    element.focus()
+}
+
+async function modalCommentClose() {
+    let element = document.getElementById("CommentModalOpen")
+    element.style.display = "none"
+}
