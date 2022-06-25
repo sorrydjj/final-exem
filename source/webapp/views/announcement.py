@@ -72,6 +72,11 @@ class AnnouncementDetailView(DetailView):
     model = Announcement
     template_name = "../templates/announcement/announcement_detail.html"
     context_object_name = "announcement"
+    
+    def get(self, request, *args, **kwargs):
+        if self.get_object().status != "accepted":
+            return HttpResponseNotFound("<h1>Not Fount</h1>")
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
