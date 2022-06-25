@@ -23,3 +23,9 @@ class Announcement(models.Model):
                               verbose_name=_("Статус объявления"))
     is_delete = models.BooleanField(default=False, verbose_name=_("Статус удаления"))
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name=_("Автор"))
+
+    class Meta:
+        db_table = 'announcement'
+        verbose_name = _('Объявление')
+        verbose_name_plural = _('Объявления')
+

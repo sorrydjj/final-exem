@@ -1,3 +1,15 @@
-from django.db import models
+from django.contrib.auth.models import AbstractUser
+from phonenumber_field.modelfields import PhoneNumberField
+from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.base_user import BaseUserManager
+from django.utils.translation import gettext as _
 
-# Create your models here.
+
+class Author(AbstractUser):
+    phone = PhoneNumberField(unique=True, region="KG", max_length=15, verbose_name=_('Номер телефона'))
+
+    def __str__(self):
+        return f"{self.username} {self.first_name} {self.last_name}"
+
+
+
