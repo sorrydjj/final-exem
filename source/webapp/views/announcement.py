@@ -22,9 +22,9 @@ class AnnouncementListView(ListView):
     def get_queryset(self):
         queryset = super().get_queryset().filter(status="accepted", is_delete=False).order_by("-publicated_at")
         if self.search_value:
-            print(self.search_value)
             query = Q(title__icontains=self.search_value) | Q(description__icontains=self.search_value)
             queryset = queryset.filter(query)
+        print(queryset)
         return queryset
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -61,9 +61,9 @@ class AnnouncementUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = "webapp.change_announcement"
 
     def form_valid(self, form):
-        form.instance.update_at.set_time_now()
+        form.instance.set_time_now()
         form.save()
-        return redirect("webapp:announcemen_detail", pk=form.instance.pk)
+        return redirect("webapp:announcemens_list")
 
     def has_permission(self):
         return self.request.user == self.get_object().author

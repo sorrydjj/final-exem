@@ -16,6 +16,7 @@
                 <p><span>Цена:</span> {{ announcement.price }}</p>
             {% endif %}
             <p><span>Категория:</span> {{ announcement.category.name }}</p>
+            <p><span>Дата публикации:</span> {{ announcement.publicated_at }}</p>
             <a style="text-decoration: none; color: black" href="{% url "accounts:profile" announcement.author.pk %}">Автор:<b> {{ announcement.author.first_name }} {{ announcement.author.last_name }}</b></a>
             {% if request.user == announcement.author %}
                 <div style="display: flex; flex-direction: row">

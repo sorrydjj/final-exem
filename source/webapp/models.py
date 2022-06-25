@@ -37,10 +37,12 @@ class Announcement(models.Model):
 
     def set_time_now(self):
         self.update_at = datetime.datetime.now()
+        self.status = "moderated"
         self.save()
 
     def set_accept_status(self):
         self.status = "accepted"
+        self.publicated_at = datetime.datetime.now()
         self.save()
 
     def set_reject_status(self):

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     #Custom apps
     'accounts',
     'webapp',
+    'accounts.templatetags.status_tag',
 
     #Lib apps
     'rest_framework',

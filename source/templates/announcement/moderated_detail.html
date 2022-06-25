@@ -16,6 +16,7 @@
                 <p><span>Цена:</span> {{ announcement.price }}</p>
             {% endif %}
             <p><span>Категория:</span> {{ announcement.category.name }}</p>
+            <p><span>Дата создания:</span> {{ announcement.created_at }}</p>
             <a style="text-decoration: none; color: black" href="{% url "accounts:profile" announcement.author.pk %}">Автор:<b> {{ announcement.author.first_name }} {{ announcement.author.last_name }}</b></a>
             {% if announcement.status == "moderated" %}
                 <div id="block_moderated_{{ announcement.pk }}" style="display: flex; flex-direction: row">

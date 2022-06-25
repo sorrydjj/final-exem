@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load status_tag %}
 {% block content %}
     <div class="card">
         <div class="card-profile">
@@ -15,4 +15,92 @@
             {% endif %}
         </div>
     </div>
+    {% if request.user == author %}
+        <div>
+            <p style="font-size: 24px; margin-top: 38px"><strong>Опубликованные объявления</strong></p>
+            <div class="d-flex">
+                <div class="row">
+                    {% for announcement in author|an_status:'accepted' %}
+                        <div class="col-xs-3 col-md-2 col-lg-1 m-2" style="width: auto">
+                            <div class="card col" style="width: 18rem;">
+                                <img src="{{ announcement.image.url }}" class="card-img-top" alt="..." width="80"
+                                     height="300">
+                                <div class="card-body">
+                                    <a style="text-decoration: none; color:#000;"
+                                       href="{% url "webapp:announcemen_detail" announcement.pk %}">
+                                        <h4>{{ announcement.title }}</h4>
+                                    </a>
+                                    <p><span>Описание:</span> {{ announcement.title }}</p>
+                                    {% if announcement.price != 0 %}
+                                        <p><span>Цена:</span> {{ announcement.price }}</p>
+                                    {% endif %}
+                                    <p><span>Категория:</span> {{ announcement.category.name }}</p>
+                                    <a style="text-decoration: none; color: black"
+                                       href="{% url "accounts:profile" announcement.author.pk %}">
+                                        Автор:<b> {{ announcement.author.first_name }} {{ announcement.author.last_name }}</b>
+                                    </a>
+                                    <p>{{ announcement.status }}</p>
+                                    {% if request.user == announcement.author %}
+                                        <div style="display: flex; flex-direction: row">
+                                            <form action="{% url "webapp:announcemen_update" announcement.pk %}"
+                                                  method="get">
+                                                <button style="margin: 5px" class="btn btn-success">Редактировать
+                                                </button>
+                                            </form>
+                                            <form action="{% url "webapp:announcemen_delete" announcement.pk %}"
+                                                  method="get">
+                                                <button style="margin: 5px" class="btn btn-danger">Удалить</button>
+                                            </form>
+                                        </div>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div>
+            <p style="font-size: 24px; margin-top: 38px"><strong>Отклоненные объявления</strong></p>
+            <div class="d-flex">
+                <div class="row">
+                    {% for announcement in author|an_status:'rejected' %}
+                        <div class="col-xs-3 col-md-2 col-lg-1 m-2" style="width: auto">
+                            <div class="card col" style="width: 18rem;">
+                                <img src="{{ announcement.image.url }}" class="card-img-top" alt="..." width="80"
+                                     height="300">
+                                <div class="card-body">
+                                    <a style="text-decoration: none; color:#000;"
+                                       href="{% url "webapp:announcemen_detail" announcement.pk %}">
+                                        <h4>{{ announcement.title }}</h4>
+                                    </a>
+                                    <p>{{ announcement.status }}</p>
+
+                                    <p><span>Описание:</span> {{ announcement.title }}</p>
+                                    {% if announcement.price != 0 %}
+                                        <p><span>Цена:</span> {{ announcement.price }}</p>
+                                    {% endif %}
+                                    <p><span>Категория:</span> {{ announcement.category.name }}</p>
+                                    <a style="text-decoration: none; color: black"
+                                       href="{% url "accounts:profile" announcement.author.pk %}">
+                                        Автор:<b> {{ announcement.author.first_name }} {{ announcement.author.last_name }}</b>
+                                    </a>
+                                    {% if request.user == announcement.author %}
+                                        <div style="display: flex; flex-direction: row">
+                                            <form action="{% url "webapp:announcemen_delete" announcement.pk %}"
+                                                  method="get">
+                                                <button style="margin: 5px" class="btn btn-danger">Удалить</button>
+                                            </form>
+                                        </div>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
