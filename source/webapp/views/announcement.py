@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.db.models import Q
+from django.http import HttpResponseNotFound
 from django.shortcuts import redirect
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 
