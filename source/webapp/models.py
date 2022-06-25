@@ -27,7 +27,8 @@ class Announcement(models.Model):
     status = models.CharField(max_length=25, choices=AnnouncementStatusChoices.choices,
                               verbose_name=_("Статус объявления"), default="moderated")
     is_delete = models.BooleanField(default=False, verbose_name=_("Статус удаления"))
-    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="announcement_user", verbose_name=_("Автор"))
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="announcement_user",
+                               verbose_name=_("Автор"))
 
     class Meta:
         db_table = 'announcement'
@@ -38,3 +39,10 @@ class Announcement(models.Model):
         self.update_at = datetime.datetime.now()
         self.save()
 
+    def set_accept_status(self):
+        self.status = "accepted"
+        self.save()
+
+    def set_reject_status(self):
+        self.status = "rejected"
+        self.save()
