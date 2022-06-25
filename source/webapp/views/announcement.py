@@ -7,7 +7,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 
-from webapp.forms import AnnouncementCreateForm
+from webapp.forms import AnnouncementCreateForm, SearchForm
 from webapp.models import Announcement
 
 
@@ -15,10 +15,37 @@ class AnnouncementListView(ListView):
     model = Announcement
     template_name = "../templates/announcement/announcement_list.html"
     context_object_name = "announcements"
+    paginate_by = 9
+    paginate_orphans = 0
+
+    def get(self, request, *args, **kwargs):
+        self.form = self.get_form()
+        self.search_value = self.get_search_value()
+        return super().get(request, *args, **kwargs)
 
     def get_queryset(self):
-        print(self.request.user.username)
-        return super().get_queryset().filter(status="accepted", is_delete=False).order_by("-publicated_at")
+        queryset = super().get_queryset().filter(status="accepted", is_delete=False).order_by("-publicated_at")
+        if self.search_value:
+            print(self.search_value)
+            query = Q(title__icontains=self.search_value) | Q(description__icontains=self.search_value)
+            queryset = queryset.filter(query)
+        return queryset
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        context['form'] = SearchForm()
+        if self.search_value:
+            context['form'] = SearchForm(initial={"search": self.search_value})
+            context['search'] = self.search_value
+        return context
+
+    def get_form(self):
+        return SearchForm(self.request.GET)
+
+    def get_search_value(self):
+        if self.form.is_valid():
+            return self.form.cleaned_data.get("search")
+
 
 
 class AnnouncementCreateView(LoginRequiredMixin, CreateView):

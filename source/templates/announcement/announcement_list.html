@@ -2,10 +2,13 @@
 
 {% block content %}
     <h1>Объявление</h1>
+    <div style="margin: 40px 0">
+    {% include 'partial/search.html' %}
+    </div>
     <div class="d-flex">
         <div class="row">
             {% for announcement in announcements %}
-                <div class="col-xs-3 col-md-2 col-lg-1" style="width: auto">
+                <div class="col-xs-3 col-md-2 col-lg-1 m-2" style="width: auto">
                     <div class="card col" style="width: 18rem;">
                         <img src="{{ announcement.image.url }}" class="card-img-top" alt="..." width="80"
                              height="300">
@@ -29,7 +32,7 @@
                                         <button style="margin: 5px" class="btn btn-success">Редактировать</button>
                                     </form>
                                     <form action="{% url "webapp:announcemen_delete" announcement.pk %}" method="get">
-                                        <button style="margin: 5px" class="btn btn-success">Удалить</button>
+                                        <button style="margin: 5px" class="btn btn-danger">Удалить</button>
                                     </form>
                                 </div>
                             {% endif %}
@@ -40,5 +43,8 @@
             {% endfor %}
         </div>
     </div>
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
 
 {% endblock %}
