@@ -10,21 +10,24 @@
                      height="80">
 
             </div>
-            <a href="{% url "webapp:announcemen_detail" announcement.pk %}"><span>{{ announcement.title }}</span></a>
+            <h3>{{ announcement.title }}</h3>
             <p><span>Описание:</span> {{ announcement.description }}</p>
             {% if announcement.price != 0 %}
                 <p><span>Цена:</span> {{ announcement.price }}</p>
             {% endif %}
             <p><span>Категория:</span> {{ announcement.category.name }}</p>
             <a style="text-decoration: none; color: black" href="{% url "accounts:profile" announcement.author.pk %}">Автор:<b> {{ announcement.author.first_name }} {{ announcement.author.last_name }}</b></a>
-            <div style="display: flex; flex-direction: row">
-                <form action="{% url "webapp:announcemen_update" announcement.pk %}" method="get">
-                    <button style="margin: 5px" class="btn btn-success">Редактировать</button>
-                </form>
-                <form action="{% url "webapp:announcemen_delete" announcement.pk %}" method="get">
-                    <button style="margin: 5px" class="btn btn-success">Удалить</button>
-                </form>
-            </div>
+            {% if request.user == announcement.author %}
+                <div style="display: flex; flex-direction: row">
+                    <form action="{% url "webapp:announcemen_update" announcement.pk %}" method="get">
+                        <button style="margin: 5px" class="btn btn-success">Редактировать</button>
+                    </form>
+                    <form action="{% url "webapp:announcemen_delete" announcement.pk %}" method="get">
+                        <button style="margin: 5px" class="btn btn-success">Удалить</button>
+                    </form>
+                </div>
+            {% endif %}
+
         </div>
     </div>
 

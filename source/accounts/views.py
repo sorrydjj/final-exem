@@ -26,10 +26,14 @@ class AuthorProfileView(DetailView):
     context_object_name = "author"
 
 
-class AuthorUpdateView(UpdateView):
+class AuthorUpdateView(PermissionRequiredMixin, UpdateView):
     model = User
     template_name = "../templates/accounts/profile_update.html"
     form_class = AuthorUpdateForm
+    permission_required = "accounts.change_author"
 
     def get_success_url(self):
         return reverse("accounts:profile", kwargs={"pk": self.get_object().pk})
+
+    def has_permission(self):
+        return self.request.user == self.get_object()
