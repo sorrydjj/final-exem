@@ -1,3 +1,5 @@
+import datetime
+
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
@@ -15,7 +17,7 @@ class AnnouncementListView(ListView):
 
     def get_queryset(self):
         print(self.request.user.username)
-        return super().get_queryset().filter(status="accepted", is_delete=False)
+        return super().get_queryset().filter(status="accepted", is_delete=False).order_by("-publicated_at")
 
 
 class AnnouncementCreateView(CreateView):
@@ -26,13 +28,18 @@ class AnnouncementCreateView(CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         form.save()
-        return redirect("crmapp:announcemen_detail", pk=form.instance.pk)
+        return redirect("webapp:announcemen_detail", pk=form.instance.pk)
 
 
 class AnnouncementUpdateView(UpdateView):
     model = Announcement
     template_name = "../templates/announcement/announcement_update.html"
     form_class = AnnouncementCreateForm
+
+    def form_valid(self, form):
+        form.instance.update_at.set_time_now()
+        form.save()
+        return redirect("webapp:announcemen_detail", pk=form.instance.pk)
 
 
 class AnnouncementDetailView(DetailView):
@@ -60,4 +67,4 @@ class AnnouncementModeratedListView(ListView):
     context_object_name = "announcements"
 
     def get_queryset(self):
-        return super().get_queryset().filter(status="moderated").exclude(is_delete=True)
+        return super().get_queryset().filter(status="moderated").exclude(is_delete=True).order_by("created_at")

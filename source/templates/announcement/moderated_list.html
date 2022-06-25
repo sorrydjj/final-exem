@@ -1,19 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% for announcement in announcements %}
-        <div class="block-ann">
-            <div>
-                <a href="{% url "webapp:announcemen_detail" announcement.pk %}"><span>{{ announcement.title }}</span></a>
-                <p><span>Описание:</span> {{ announcement.title }}</p>
-                {% if announcement.price != 0 %}
-                    <p><span>Цена:</span> {{ announcement.price }}</p>
-                {% endif %}
-                <p><span>Категория:</span> {{ announcement.category.name }}</p>
-                <p><span>Автор:</span> {{ announcement.author.first_name }} {{ announcement.author.last_name }}</p>
+    <div class="d-flex">
+        <div class="row">
+            {% for announcement in announcements %}
 
-            </div>
+                <div class="col-xs-4" style="width: auto">
+                    <div class="card col" style="width: 18rem;">
+                        <img src="{{ announcement.image.url }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <a style="text-decoration: none; color:#000;"
+                               href="{% url "webapp:announcemen_detail" announcement.pk %}">
+                                <h4>{{ announcement.title }}</h4>
+                            </a>
+                            <p><span>Описание:</span> {{ announcement.title }}</p>
+                            {% if announcement.price != 0 %}
+                                <p><span>Цена:</span> {{ announcement.price }}</p>
+                            {% endif %}
+                            <p><span>Категория:</span> {{ announcement.category.name }}</p>
+                            <a style="text-decoration: none; color: black" href="{% url "accounts:profile" announcement.author.pk %}">
+                                Автор:<b> {{ announcement.author.first_name }} {{ announcement.author.last_name }}</b>
+                            </a>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            {% endfor %}
+
         </div>
-    {% endfor %}
+    </div>
 
 {% endblock %}

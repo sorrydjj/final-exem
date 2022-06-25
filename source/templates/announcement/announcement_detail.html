@@ -16,10 +16,15 @@
                 <p><span>Цена:</span> {{ announcement.price }}</p>
             {% endif %}
             <p><span>Категория:</span> {{ announcement.category.name }}</p>
-            <p><span>Автор:</span> {{ announcement.author.first_name }} {{ announcement.author.last_name }}</p>
-            <a href="{% url "webapp:announcemen_update" announcement.pk %}"><span>Редактировать</span></a>
-            <a href="{% url "webapp:announcemen_delete" announcement.pk %}"><span>Удалить</span></a>
-
+            <a style="text-decoration: none; color: black" href="{% url "accounts:profile" announcement.author.pk %}">Автор:<b> {{ announcement.author.first_name }} {{ announcement.author.last_name }}</b></a>
+            <div style="display: flex; flex-direction: row">
+                <form action="{% url "webapp:announcemen_update" announcement.pk %}" method="get">
+                    <button style="margin: 5px" class="btn btn-success">Редактировать</button>
+                </form>
+                <form action="{% url "webapp:announcemen_delete" announcement.pk %}" method="get">
+                    <button style="margin: 5px" class="btn btn-success">Удалить</button>
+                </form>
+            </div>
         </div>
     </div>
 

@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator
 from django.db import models
@@ -31,4 +33,8 @@ class Announcement(models.Model):
         db_table = 'announcement'
         verbose_name = _('Объявление')
         verbose_name_plural = _('Объявления')
+
+    def set_time_now(self):
+        self.update_at = datetime.datetime.now()
+        self.save()
 

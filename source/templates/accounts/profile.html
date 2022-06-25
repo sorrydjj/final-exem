@@ -8,7 +8,7 @@
         <div class="card-body">
             <h5 class="card-title">{{ author.username }}</h5>
             <p class="card-text">Номер телефона: <span>{{ author.phone }}</span></p>
-            <form action="{% url "accounts:profile_update" author.pk %}">
+            <form action="{% url "accounts:profile_update" author.pk %}" method="get">
                 <button class="btn btn-success">Редактировать Профиль</button>
             </form>
         </div>
